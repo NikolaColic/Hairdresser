@@ -1,0 +1,37 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.30717.126
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Hair.Api", "Hair.Api\Hair.Api.csproj", "{3E49F201-37C1-4360-8720-F16C63C78AEE}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Hair.Service", "Hair.Service\Hair.Service.csproj", "{EFCFAD3E-256B-4759-974A-18CB1C7F9FDB}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Hair.Data", "Hair.Data\Hair.Data.csproj", "{04182813-8D3D-4418-8131-409C6EDF5B7D}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{3E49F201-37C1-4360-8720-F16C63C78AEE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3E49F201-37C1-4360-8720-F16C63C78AEE}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3E49F201-37C1-4360-8720-F16C63C78AEE}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3E49F201-37C1-4360-8720-F16C63C78AEE}.Release|Any CPU.Build.0 = Release|Any CPU
+		{EFCFAD3E-256B-4759-974A-18CB1C7F9FDB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{EFCFAD3E-256B-4759-974A-18CB1C7F9FDB}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{EFCFAD3E-256B-4759-974A-18CB1C7F9FDB}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{EFCFAD3E-256B-4759-974A-18CB1C7F9FDB}.Release|Any CPU.Build.0 = Release|Any CPU
+		{04182813-8D3D-4418-8131-409C6EDF5B7D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{04182813-8D3D-4418-8131-409C6EDF5B7D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{04182813-8D3D-4418-8131-409C6EDF5B7D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{04182813-8D3D-4418-8131-409C6EDF5B7D}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {F1051878-C4BE-469B-A2CD-1C16BD12061B}
+	EndGlobalSection
+EndGlobal
