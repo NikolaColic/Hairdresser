@@ -1,0 +1,210 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>Hair.Api</name>
+    </assembly>
+    <members>
+        <member name="T:Hair.Api.Controllers.FavouriteHairdresserController">
+            <summary>
+            Web API Controller for favourite hairdresser
+            </summary>
+        </member>
+        <member name="M:Hair.Api.Controllers.FavouriteHairdresserController.#ctor(Hair.Service.Interface.IGeneric{Hair.Data.Entities.FavouriteHairdresser})">
+            <summary>
+            Constructor
+            </summary>
+            <param name="generic"></param>
+        </member>
+        <member name="M:Hair.Api.Controllers.FavouriteHairdresserController.Add(Hair.Data.Entities.FavouriteHairdresser)">
+            <summary>
+            Add favourite hairdresser for user
+            </summary>
+            <param name="favouriteHairdresser"></param>
+            <returns>Return 200 ok if add favourite hairdresser</returns>
+        </member>
+        <member name="M:Hair.Api.Controllers.FavouriteHairdresserController.Delete(System.Int32)">
+            <summary>
+            Delete favourite hairdresser for user with that parametar id
+            </summary>
+            <param name="id"></param>
+            <returns>Deleted </returns>
+        </member>
+        <member name="T:Hair.Api.Controllers.HairdresserController">
+            <summary>
+            WEB API Controller for haidresser
+            </summary>
+        </member>
+        <member name="M:Hair.Api.Controllers.HairdresserController.#ctor(Hair.Service.Interface.IGeneric{Hair.Data.Entities.Hairdresser})">
+            <summary>
+            Constructor
+            </summary>
+            <param name="generic"></param>
+        </member>
+        <member name="M:Hair.Api.Controllers.HairdresserController.GetAll">
+            <summary>
+            Get all haidressers
+            </summary>
+            <returns>Return a list of hairdresser with full information</returns>
+        </member>
+        <member name="M:Hair.Api.Controllers.HairdresserController.GetById(System.Int32)">
+            <summary>
+            Find hairdresser by id
+            </summary>
+            <param name="id"></param>
+            <returns>Return hairdresser with tha param id</returns>
+        </member>
+        <member name="M:Hair.Api.Controllers.HairdresserController.Add(Hair.Data.Entities.Hairdresser)">
+            <summary>
+            Add new haidresser to database
+            </summary>
+            <param name="hairdresser"></param>
+            <returns>Return list of hairdressers with new</returns>
+        </member>
+        <member name="M:Hair.Api.Controllers.HairdresserController.Update(System.Int32,Hair.Data.Entities.Hairdresser)">
+            <summary>
+            Update haidresser with that param id
+            </summary>
+            <param name="id"></param>
+            <param name="hairdresser"></param>
+            <returns>Return list of haidressers with updated hairdresser</returns>
+        </member>
+        <member name="M:Hair.Api.Controllers.HairdresserController.Delete(System.Int32)">
+            <summary>
+            Delete haidresser with param id
+            </summary>
+            <param name="id"></param>
+            <returns></returns>
+        </member>
+        <member name="T:Hair.Api.Controllers.HairdresserImageController">
+            <summary>
+            WEB API Haidresser image controller
+            </summary>
+        </member>
+        <member name="T:Hair.Api.Controllers.MunicipalityController">
+            <summary>
+            WEB API Municipality controller
+            </summary>
+        </member>
+        <member name="M:Hair.Api.Controllers.MunicipalityController.#ctor(Hair.Service.Interface.IGeneric{Hair.Data.Entities.Municipality})">
+            <summary>
+            Constructor
+            </summary>
+            <param name="generic"></param>
+        </member>
+        <member name="M:Hair.Api.Controllers.MunicipalityController.GetAll">
+            <summary>
+            Returns all municipalities
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="T:Hair.Api.Controllers.ReservationController">
+            <summary>
+            WEB API for reservation controller
+            </summary>
+        </member>
+        <member name="M:Hair.Api.Controllers.ReservationController.#ctor(Hair.Service.Interface.IGeneric{Hair.Data.Entities.Reservation})">
+            <summary>
+            Constructor
+            </summary>
+            <param name="generic"></param>
+        </member>
+        <member name="M:Hair.Api.Controllers.ReservationController.GetAll">
+            <summary>
+            Get all reservations
+            </summary>
+            <returns>Returns a list of reservations</returns>
+        </member>
+        <member name="M:Hair.Api.Controllers.ReservationController.GetById(System.Int32)">
+            <summary>
+            Filter reservation by id
+            </summary>
+            <param name="id"></param>
+            <returns>Return reservation filter by id </returns>
+        </member>
+        <member name="M:Hair.Api.Controllers.ReservationController.Add(Hair.Data.Entities.Reservation)">
+            <summary>
+            Add new reservation
+            </summary>
+            <param name="reservation"></param>
+            <returns>Return a list of reservations if add success</returns>
+        </member>
+        <member name="M:Hair.Api.Controllers.ReservationController.Update(System.Int32,Hair.Data.Entities.Reservation)">
+            <summary>
+            Update reservation 
+            </summary>
+            <param name="id"></param>
+            <param name="reservation"></param>
+            <returns>Return a list of reservations if update success</returns>
+        </member>
+        <member name="M:Hair.Api.Controllers.ReservationController.Delete(System.Int32)">
+            <summary>
+            Delet reservation by id
+            </summary>
+            <param name="id"></param>
+            <returns></returns>
+        </member>
+        <member name="T:Hair.Api.Controllers.SocialNetworkController">
+            <summary>
+            WEB API Social network controller
+            </summary>
+        </member>
+        <member name="M:Hair.Api.Controllers.SocialNetworkController.#ctor(Hair.Service.Interface.IGeneric{Hair.Data.Entities.SocialNetwork})">
+            <summary>
+            Constructor
+            </summary>
+            <param name="generic"></param>
+        </member>
+        <member name="M:Hair.Api.Controllers.SocialNetworkController.GetAll">
+            <summary>
+            Returns all social networks
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="T:Hair.Api.Controllers.UserController">
+            <summary>
+            WEB API Controller for user 
+            </summary>
+        </member>
+        <member name="M:Hair.Api.Controllers.UserController.#ctor(Hair.Service.Interface.IGeneric{Hair.Data.Entities.User})">
+            <summary>
+            Constructor
+            </summary>
+            <param name="generic"></param>
+        </member>
+        <member name="M:Hair.Api.Controllers.UserController.GetAll">
+            <summary>
+            Get all users
+            </summary>
+            <returns>Returns a list of users</returns>
+        </member>
+        <member name="M:Hair.Api.Controllers.UserController.GetById(System.Int32)">
+            <summary>
+            Find user by id
+            </summary>
+            <param name="id"></param>
+            <returns>Return user filter by id</returns>
+        </member>
+        <member name="M:Hair.Api.Controllers.UserController.Add(Hair.Data.Entities.User)">
+            <summary>
+            Add new user OAUTH
+            </summary>
+            <param name="user"></param>
+            <returns>Return a list of users</returns>
+        </member>
+        <member name="M:Hair.Api.Controllers.UserController.Update(System.Int32,Hair.Data.Entities.User)">
+            <summary>
+            Update user 
+            </summary>
+            <param name="id"></param>
+            <param name="user"></param>
+            <returns>Return user by id</returns>
+        </member>
+        <member name="M:Hair.Api.Controllers.UserController.Delete(System.Int32)">
+            <summary>
+            Delete user by id
+            </summary>
+            <param name="id"></param>
+            <returns>Return noContent if user was deleted</returns>
+        </member>
+    </members>
+</doc>

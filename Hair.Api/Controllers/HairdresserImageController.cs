@@ -8,40 +8,12 @@ using System.Threading.Tasks;
 
 namespace Hair.Api.Controllers
 {
+    /// <summary>
+    /// WEB API Haidresser image controller
+    /// </summary>
     [Route("api/[controller]")]
     [ApiController]
     public class HairdresserImageController : ControllerBase
     {
-        // GET: api/<HairdresserImageController>
-        [HttpGet]
-        public IEnumerable<string> Get()
-        {
-            return new string[] { "value1", "value2" };
-        }
-
-        // GET api/<HairdresserImageController>/5
-        [HttpGet("{id}")]
-        public string Get(int id)
-        {
-            return "value";
-        }
-
-        // POST api/<HairdresserImageController>
-        [HttpPost]
-        public void Post([FromBody] string value)
-        {
-        }
-
-        // PUT api/<HairdresserImageController>/5
-        [HttpPut("{id}")]
-        public void Put(int id, [FromBody] string value)
-        {
-        }
-
-        // DELETE api/<HairdresserImageController>/5
-        [HttpDelete("{id}")]
-        public void Delete(int id)
-        {
-        }
     }
 }

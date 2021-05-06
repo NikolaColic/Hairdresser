@@ -1,0 +1,28 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>Hair.Data</name>
+    </assembly>
+    <members>
+        <member name="T:Hair.Data.Entities.FavouriteHairdresser">
+            <summary>
+            Class favourite hairdresser for user
+            </summary>
+        </member>
+        <member name="P:Hair.Data.Entities.FavouriteHairdresser.FavouriteHairdresserId">
+            <summary>
+            Unique id
+            </summary>
+        </member>
+        <member name="P:Hair.Data.Entities.FavouriteHairdresser.Hairdresser">
+            <summary>
+            Informations about hairdresser
+            </summary>
+        </member>
+        <member name="P:Hair.Data.Entities.FavouriteHairdresser.User">
+            <summary>
+            Informations about user
+            </summary>
+        </member>
+    </members>
+</doc>

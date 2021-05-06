@@ -11,16 +11,32 @@ using System.Threading.Tasks;
 
 namespace Hair.Api.Controllers
 {
+    /// <summary>
+    /// Web API Controller for favourite hairdresser
+    /// </summary>
     [Route("hair/favourite")]
     [ApiController]
     public class FavouriteHairdresserController : ControllerBase
     {
         private readonly IGeneric<FavouriteHairdresser> _generic;
+        /// <summary>
+        /// Constructor
+        /// </summary>
+        /// <param name="generic"></param>
         public FavouriteHairdresserController(IGeneric<FavouriteHairdresser> generic)
         {
             this._generic = generic;
         }
        
+        /// <summary>
+        /// Add favourite hairdresser for user
+        /// </summary>
+        /// <param name="favouriteHairdresser"></param>
+        /// <returns>Return 200 ok if add favourite hairdresser</returns>
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status404NotFound)]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
+        [ProducesResponseType(StatusCodes.Status500InternalServerError)]
         [HttpPost]
         public async Task<ActionResult> Add([FromBody] FavouriteHairdresser favouriteHairdresser)
         {
@@ -40,6 +56,15 @@ namespace Hair.Api.Controllers
             }
         }
 
+        /// <summary>
+        /// Delete favourite hairdresser for user with that parametar id
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns>Deleted </returns>
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status404NotFound)]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
+        [ProducesResponseType(StatusCodes.Status500InternalServerError)]
         [HttpDelete("{id}")]
         public async Task<ActionResult> Delete(int id)
         {

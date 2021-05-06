@@ -11,16 +11,30 @@ using System.Threading.Tasks;
 
 namespace Hair.Api.Controllers
 {
+    /// <summary>
+    /// WEB API Social network controller
+    /// </summary>
     [Route("api/socialnetworks")]
     [ApiController]
     public class SocialNetworkController : ControllerBase
     {
         private readonly IGeneric<SocialNetwork> _generic;
+        /// <summary>
+        /// Constructor
+        /// </summary>
+        /// <param name="generic"></param>
         public SocialNetworkController(IGeneric<SocialNetwork> generic)
         {
             this._generic = generic;
         }
-
+        /// <summary>
+        /// Returns all social networks
+        /// </summary>
+        /// <returns></returns>
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status404NotFound)]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
+        [ProducesResponseType(StatusCodes.Status500InternalServerError)]
         [HttpGet("GetAll")]
         public async Task<ActionResult<IEnumerable<SocialNetwork>>> GetAll()
         {

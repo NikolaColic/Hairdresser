@@ -11,16 +11,30 @@ using System.Threading.Tasks;
 
 namespace Hair.Api.Controllers
 {
+    /// <summary>
+    /// WEB API Municipality controller
+    /// </summary>
     [Route("api/municipality")]
     [ApiController]
     public class MunicipalityController : ControllerBase
     {
         private readonly IGeneric<Municipality> _generic;
+        /// <summary>
+        /// Constructor
+        /// </summary>
+        /// <param name="generic"></param>
         public MunicipalityController(IGeneric<Municipality> generic)
         {
             this._generic = generic;
         }
-
+        /// <summary>
+        /// Returns all municipalities
+        /// </summary>
+        /// <returns></returns>
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status404NotFound)]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
+        [ProducesResponseType(StatusCodes.Status500InternalServerError)]
         [HttpGet("GetAll")]
         public async Task<ActionResult<IEnumerable<Municipality>>> GetAll()
         {
