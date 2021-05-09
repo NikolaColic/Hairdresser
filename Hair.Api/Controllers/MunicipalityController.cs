@@ -14,7 +14,12 @@ namespace Hair.Api.Controllers
     /// <summary>
     /// WEB API Municipality controller
     /// </summary>
-    [Route("api/municipality")]
+    [ProducesResponseType(StatusCodes.Status200OK)]
+    [ProducesResponseType(StatusCodes.Status404NotFound)]
+    [ProducesResponseType(StatusCodes.Status400BadRequest)]
+    [ProducesResponseType(StatusCodes.Status500InternalServerError)]
+    [Produces("application/json")]
+    [Route("hair/v1/municipality")]
     [ApiController]
     public class MunicipalityController : ControllerBase
     {
@@ -31,10 +36,6 @@ namespace Hair.Api.Controllers
         /// Returns all municipalities
         /// </summary>
         /// <returns></returns>
-        [ProducesResponseType(StatusCodes.Status200OK)]
-        [ProducesResponseType(StatusCodes.Status404NotFound)]
-        [ProducesResponseType(StatusCodes.Status400BadRequest)]
-        [ProducesResponseType(StatusCodes.Status500InternalServerError)]
         [HttpGet("GetAll")]
         public async Task<ActionResult<IEnumerable<Municipality>>> GetAll()
         {

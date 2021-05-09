@@ -14,7 +14,12 @@ namespace Hair.Api.Controllers
     /// <summary>
     /// WEB API Controller for user 
     /// </summary>
-    [Route("api/users")]
+    [ProducesResponseType(StatusCodes.Status200OK)]
+    [ProducesResponseType(StatusCodes.Status404NotFound)]
+    [ProducesResponseType(StatusCodes.Status400BadRequest)]
+    [ProducesResponseType(StatusCodes.Status500InternalServerError)]
+    [Produces("application/json")]
+    [Route("hair/v1/users")]
     [ApiController]
     public class UserController : ControllerBase
     {
@@ -31,10 +36,6 @@ namespace Hair.Api.Controllers
         /// Get all users
         /// </summary>
         /// <returns>Returns a list of users</returns>
-        [ProducesResponseType(StatusCodes.Status200OK)]
-        [ProducesResponseType(StatusCodes.Status404NotFound)]
-        [ProducesResponseType(StatusCodes.Status400BadRequest)]
-        [ProducesResponseType(StatusCodes.Status500InternalServerError)]
         [HttpGet("GetAll")]
         public async Task<ActionResult<IEnumerable<User>>> GetAll()
         {
@@ -54,10 +55,6 @@ namespace Hair.Api.Controllers
         /// </summary>
         /// <param name="id"></param>
         /// <returns>Return user filter by id</returns>
-        [ProducesResponseType(StatusCodes.Status200OK)]
-        [ProducesResponseType(StatusCodes.Status404NotFound)]
-        [ProducesResponseType(StatusCodes.Status400BadRequest)]
-        [ProducesResponseType(StatusCodes.Status500InternalServerError)]
         [HttpGet("{id}")]
         public async Task<ActionResult<User>> GetById(int id)
         {
@@ -81,10 +78,6 @@ namespace Hair.Api.Controllers
         /// </summary>
         /// <param name="user"></param>
         /// <returns>Return a list of users</returns>
-        [ProducesResponseType(StatusCodes.Status200OK)]
-        [ProducesResponseType(StatusCodes.Status404NotFound)]
-        [ProducesResponseType(StatusCodes.Status400BadRequest)]
-        [ProducesResponseType(StatusCodes.Status500InternalServerError)]
         [HttpPost]
         public async Task<ActionResult<IEnumerable<User>>> Add([FromBody] User user)
         {
@@ -110,10 +103,6 @@ namespace Hair.Api.Controllers
         /// <param name="id"></param>
         /// <param name="user"></param>
         /// <returns>Return user by id</returns>
-        [ProducesResponseType(StatusCodes.Status200OK)]
-        [ProducesResponseType(StatusCodes.Status404NotFound)]
-        [ProducesResponseType(StatusCodes.Status400BadRequest)]
-        [ProducesResponseType(StatusCodes.Status500InternalServerError)]
         [HttpPut("{id}")]
         public async Task<ActionResult<IEnumerable<User>>> Update(int id, [FromBody] User user)
         {
@@ -138,10 +127,6 @@ namespace Hair.Api.Controllers
         /// </summary>
         /// <param name="id"></param>
         /// <returns>Return noContent if user was deleted</returns>
-        [ProducesResponseType(StatusCodes.Status200OK)]
-        [ProducesResponseType(StatusCodes.Status404NotFound)]
-        [ProducesResponseType(StatusCodes.Status400BadRequest)]
-        [ProducesResponseType(StatusCodes.Status500InternalServerError)]
         [HttpDelete("{id}")]
         public async Task<ActionResult> Delete(int id)
         {

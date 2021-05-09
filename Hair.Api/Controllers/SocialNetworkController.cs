@@ -14,7 +14,12 @@ namespace Hair.Api.Controllers
     /// <summary>
     /// WEB API Social network controller
     /// </summary>
-    [Route("api/socialnetworks")]
+    [ProducesResponseType(StatusCodes.Status200OK)]
+    [ProducesResponseType(StatusCodes.Status404NotFound)]
+    [ProducesResponseType(StatusCodes.Status400BadRequest)]
+    [ProducesResponseType(StatusCodes.Status500InternalServerError)]
+    [Produces("application/json")]
+    [Route("hair/v1/socialnetworks")]
     [ApiController]
     public class SocialNetworkController : ControllerBase
     {
@@ -31,10 +36,6 @@ namespace Hair.Api.Controllers
         /// Returns all social networks
         /// </summary>
         /// <returns></returns>
-        [ProducesResponseType(StatusCodes.Status200OK)]
-        [ProducesResponseType(StatusCodes.Status404NotFound)]
-        [ProducesResponseType(StatusCodes.Status400BadRequest)]
-        [ProducesResponseType(StatusCodes.Status500InternalServerError)]
         [HttpGet("GetAll")]
         public async Task<ActionResult<IEnumerable<SocialNetwork>>> GetAll()
         {

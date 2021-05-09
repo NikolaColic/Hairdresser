@@ -14,7 +14,12 @@ namespace Hair.Api.Controllers
     /// <summary>
     /// Web API Controller for favourite hairdresser
     /// </summary>
-    [Route("hair/favourite")]
+    [ProducesResponseType(StatusCodes.Status200OK)]
+    [ProducesResponseType(StatusCodes.Status404NotFound)]
+    [ProducesResponseType(StatusCodes.Status400BadRequest)]
+    [ProducesResponseType(StatusCodes.Status500InternalServerError)]
+    [Produces("application/json")]
+    [Route("hair/v1/favourite")]
     [ApiController]
     public class FavouriteHairdresserController : ControllerBase
     {
@@ -33,10 +38,6 @@ namespace Hair.Api.Controllers
         /// </summary>
         /// <param name="favouriteHairdresser"></param>
         /// <returns>Return 200 ok if add favourite hairdresser</returns>
-        [ProducesResponseType(StatusCodes.Status200OK)]
-        [ProducesResponseType(StatusCodes.Status404NotFound)]
-        [ProducesResponseType(StatusCodes.Status400BadRequest)]
-        [ProducesResponseType(StatusCodes.Status500InternalServerError)]
         [HttpPost]
         public async Task<ActionResult> Add([FromBody] FavouriteHairdresser favouriteHairdresser)
         {
@@ -61,10 +62,6 @@ namespace Hair.Api.Controllers
         /// </summary>
         /// <param name="id"></param>
         /// <returns>Deleted </returns>
-        [ProducesResponseType(StatusCodes.Status200OK)]
-        [ProducesResponseType(StatusCodes.Status404NotFound)]
-        [ProducesResponseType(StatusCodes.Status400BadRequest)]
-        [ProducesResponseType(StatusCodes.Status500InternalServerError)]
         [HttpDelete("{id}")]
         public async Task<ActionResult> Delete(int id)
         {

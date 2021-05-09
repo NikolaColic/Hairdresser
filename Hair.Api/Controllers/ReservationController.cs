@@ -14,7 +14,12 @@ namespace Hair.Api.Controllers
     /// <summary>
     /// WEB API for reservation controller
     /// </summary>
-    [Route("hair/reservations")]
+    [ProducesResponseType(StatusCodes.Status200OK)]
+    [ProducesResponseType(StatusCodes.Status404NotFound)]
+    [ProducesResponseType(StatusCodes.Status400BadRequest)]
+    [ProducesResponseType(StatusCodes.Status500InternalServerError)]
+    [Produces("application/json")]
+    [Route("hair/v1/reservations")]
     [ApiController]
     public class ReservationController : ControllerBase
     {
@@ -31,10 +36,6 @@ namespace Hair.Api.Controllers
         /// Get all reservations
         /// </summary>
         /// <returns>Returns a list of reservations</returns>
-        [ProducesResponseType(StatusCodes.Status200OK)]
-        [ProducesResponseType(StatusCodes.Status404NotFound)]
-        [ProducesResponseType(StatusCodes.Status400BadRequest)]
-        [ProducesResponseType(StatusCodes.Status500InternalServerError)]
         [HttpGet("GetAll")]
         public async Task<ActionResult<IEnumerable<Reservation>>> GetAll()
         {
@@ -54,10 +55,6 @@ namespace Hair.Api.Controllers
         /// </summary>
         /// <param name="id"></param>
         /// <returns>Return reservation filter by id </returns>
-        [ProducesResponseType(StatusCodes.Status200OK)]
-        [ProducesResponseType(StatusCodes.Status404NotFound)]
-        [ProducesResponseType(StatusCodes.Status400BadRequest)]
-        [ProducesResponseType(StatusCodes.Status500InternalServerError)]
         [HttpGet("{id}")]
         public async Task<ActionResult<Reservation>> GetById(int id)
         {
@@ -81,10 +78,6 @@ namespace Hair.Api.Controllers
         /// </summary>
         /// <param name="reservation"></param>
         /// <returns>Return a list of reservations if add success</returns>
-        [ProducesResponseType(StatusCodes.Status200OK)]
-        [ProducesResponseType(StatusCodes.Status404NotFound)]
-        [ProducesResponseType(StatusCodes.Status400BadRequest)]
-        [ProducesResponseType(StatusCodes.Status500InternalServerError)]
         [HttpPost]
         public async Task<ActionResult<IEnumerable<Hairdresser>>> Add([FromBody] Reservation reservation)
         {
@@ -110,10 +103,6 @@ namespace Hair.Api.Controllers
         /// <param name="id"></param>
         /// <param name="reservation"></param>
         /// <returns>Return a list of reservations if update success</returns>
-        [ProducesResponseType(StatusCodes.Status200OK)]
-        [ProducesResponseType(StatusCodes.Status404NotFound)]
-        [ProducesResponseType(StatusCodes.Status400BadRequest)]
-        [ProducesResponseType(StatusCodes.Status500InternalServerError)]
         [HttpPut("{id}")]
         public async Task<ActionResult<IEnumerable<Reservation>>> Update(int id, [FromBody] Reservation reservation)
         {
@@ -138,10 +127,6 @@ namespace Hair.Api.Controllers
         /// </summary>
         /// <param name="id"></param>
         /// <returns></returns>
-        [ProducesResponseType(StatusCodes.Status200OK)]
-        [ProducesResponseType(StatusCodes.Status404NotFound)]
-        [ProducesResponseType(StatusCodes.Status400BadRequest)]
-        [ProducesResponseType(StatusCodes.Status500InternalServerError)]
         [HttpDelete("{id}")]
         public async Task<ActionResult> Delete(int id)
         {

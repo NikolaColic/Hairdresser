@@ -41,7 +41,13 @@ namespace Hair.Api
             services.AddScoped<IGeneric<Reservation>, ReservationService>();
             services.AddScoped<IGeneric<SocialNetwork>, SocialNetworkService>();
             services.AddScoped<IGeneric<User>, UserService>();
+            services.AddApiVersioning((setupAction) =>
+            {
+                setupAction.AssumeDefaultVersionWhenUnspecified = true;
+                setupAction.DefaultApiVersion = new ApiVersion(1, 0);
+                setupAction.ReportApiVersions = true;
 
+            });
             services.AddSwaggerGen((setupAction) =>
             {
                 setupAction.SwaggerDoc("HairdresserApi", new Microsoft.OpenApi.Models.OpenApiInfo()
