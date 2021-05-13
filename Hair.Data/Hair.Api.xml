@@ -4,11 +4,6 @@
         <name>Hair.Data</name>
     </assembly>
     <members>
-        <member name="T:Hair.Data.Entities.FavouriteHairdresser">
-            <summary>
-            Class favourite hairdresser for user
-            </summary>
-        </member>
         <member name="P:Hair.Data.Entities.FavouriteHairdresser.FavouriteHairdresserId">
             <summary>
             Unique id

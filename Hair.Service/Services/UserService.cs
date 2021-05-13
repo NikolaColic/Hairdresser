@@ -32,11 +32,11 @@ namespace Hair.Service.Services
         public async Task<IEnumerable<User>> GetAll()
         {
             var users = await _db.User.ToListAsync();
-            Parallel.ForEach(users, user =>
-             {
-                 user.ReservationsHistory = _db.Reservation.Where((res) => res.User.UserId == user.UserId);
-                 user.FavouritesHairdresser = _db.FavouriteHairdresser.Where((res) => res.User.UserId == user.UserId);
-             });
+            foreach(var user in users)
+            {
+                 user.ReservationsHistory = _db.Reservation.Where((res) => res.User.UserId == user.UserId).ToList();
+                 user.FavouritesHairdresser = _db.FavouriteHairdresser.Where((res) => res.User.UserId == user.UserId).ToList();
+            }
             return users;
         }
 

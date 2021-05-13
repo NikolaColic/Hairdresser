@@ -6,6 +6,7 @@ using System.Text;
 
 namespace Hair.Data.Entities
 {
+    [Serializable]
     public class Reservation
     {
         [Key]

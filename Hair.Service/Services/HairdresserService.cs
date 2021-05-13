@@ -77,14 +77,12 @@ namespace Hair.Service.Services
                 .Include((el) => el.Municipality)
                 .ToListAsync();
 
-            Parallel.ForEach(hairdressers, hairdresser =>
+            foreach(var hairdresser in hairdressers)
             {
-                hairdresser.Reservations =  _db.Reservation.Where((res) => res.Hairdresser.HairdresserId == hairdresser.HairdresserId);
-                hairdresser.Images =  _db.HairdresserImage.Where((res) => res.Hairdresser.HairdresserId == hairdresser.HairdresserId);
-                hairdresser.SocialNetworks = _db.SocialHairdresser.Where((res) => res.Hairdresser.HairdresserId == hairdresser.HairdresserId);
-
-            });
-
+                hairdresser.Reservations = _db.Reservation.Where((res) => res.Hairdresser.HairdresserId == hairdresser.HairdresserId).ToList() ;
+                hairdresser.Images =   _db.HairdresserImage.Where((res) => res.Hairdresser.HairdresserId == hairdresser.HairdresserId).ToList();
+                hairdresser.SocialNetworks =  _db.SocialHairdresser.Where((res) => res.Hairdresser.HairdresserId == hairdresser.HairdresserId).ToList();
+            }
             return hairdressers;
 
         }
@@ -93,9 +91,9 @@ namespace Hair.Service.Services
         {
             var hairdresser = await _db.Hairdresser.SingleOrDefaultAsync((hair) => hair.HairdresserId == id);
             if (hairdresser is null) return hairdresser;
-            hairdresser.Reservations = _db.Reservation.Where((res) => res.Hairdresser.HairdresserId == hairdresser.HairdresserId);
-            hairdresser.Images = _db.HairdresserImage.Where((res) => res.Hairdresser.HairdresserId == hairdresser.HairdresserId);
-            hairdresser.SocialNetworks = _db.SocialHairdresser.Where((res) => res.Hairdresser.HairdresserId == hairdresser.HairdresserId);
+            hairdresser.Reservations = _db.Reservation.Where((res) => res.Hairdresser.HairdresserId == hairdresser.HairdresserId).ToList();
+            hairdresser.Images = _db.HairdresserImage.Where((res) => res.Hairdresser.HairdresserId == hairdresser.HairdresserId).ToList();
+            hairdresser.SocialNetworks = _db.SocialHairdresser.Where((res) => res.Hairdresser.HairdresserId == hairdresser.HairdresserId).ToList();
             return hairdresser;
         }
 

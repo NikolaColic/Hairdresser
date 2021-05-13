@@ -51,9 +51,13 @@ namespace Hair.Service.Services
             return reservations;
         }
 
-        public Task<Reservation> GetById(int id)
+        public async Task<Reservation> GetById(int id)
         {
-            throw new NotImplementedException();
+            var reservation = await _db.Reservation
+                .Include((res) => res.Hairdresser)
+                .Include((res) => res.User)
+                .SingleOrDefaultAsync((el) => el.ReservationId == id);
+            return reservation;
         }
 
         public async Task<bool> Update(Reservation obj)

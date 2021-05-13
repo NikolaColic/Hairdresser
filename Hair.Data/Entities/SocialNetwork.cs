@@ -5,6 +5,7 @@ using System.Text;
 
 namespace Hair.Data.Entities
 {
+    [Serializable]
     public class SocialNetwork
     {
         [Key]

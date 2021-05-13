@@ -41,6 +41,9 @@ namespace Hair.Api
             services.AddScoped<IGeneric<Reservation>, ReservationService>();
             services.AddScoped<IGeneric<SocialNetwork>, SocialNetworkService>();
             services.AddScoped<IGeneric<User>, UserService>();
+            services.AddControllers().AddNewtonsoftJson(options =>
+                    options.SerializerSettings.ReferenceLoopHandling = Newtonsoft.Json.ReferenceLoopHandling.Ignore);
+                
             services.AddApiVersioning((setupAction) =>
             {
                 setupAction.AssumeDefaultVersionWhenUnspecified = true;
