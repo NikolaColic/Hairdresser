@@ -33,6 +33,8 @@ namespace Hair.Service.Services
             obj.Municipality = municipality;
 
             await _db.AddAsync(obj);
+            await _db.SaveChangesAsync();
+
 
             var addedObj = await _db.Hairdresser.SingleOrDefaultAsync((hair) => hair.TaxId == obj.TaxId);
             if(addedObj is null)
@@ -60,9 +62,14 @@ namespace Hair.Service.Services
             }
             _db.Reservation.Where((res) => res.Hairdresser.HairdresserId == hairdresser.HairdresserId)
                 .ToList().ForEach((res) => _db.Entry(res).State = EntityState.Deleted);
+
             _db.HairdresserImage.Where((res) => res.Hairdresser.HairdresserId == hairdresser.HairdresserId)
                 .ToList().ForEach((res) => _db.Entry(res).State = EntityState.Deleted);
+
             _db.SocialHairdresser.Where((res) => res.Hairdresser.HairdresserId == hairdresser.HairdresserId)
+                .ToList().ForEach((res) => _db.Entry(res).State = EntityState.Deleted);
+
+            _db.FavouriteHairdresser.Where((res) => res.Hairdresser.HairdresserId == hairdresser.HairdresserId)
                 .ToList().ForEach((res) => _db.Entry(res).State = EntityState.Deleted);
 
             _db.Entry(hairdresser).State = EntityState.Deleted;
@@ -89,17 +96,45 @@ namespace Hair.Service.Services
 
         public async Task<Hairdresser> GetById(int id)
         {
-            var hairdresser = await _db.Hairdresser.SingleOrDefaultAsync((hair) => hair.HairdresserId == id);
+            var hairdresser = await _db.Hairdresser
+                .Include((hair) => hair.Owner)
+                .Include((hair) => hair.Municipality)
+                .SingleOrDefaultAsync((hair) => hair.HairdresserId == id);
             if (hairdresser is null) return hairdresser;
+
             hairdresser.Reservations = _db.Reservation.Where((res) => res.Hairdresser.HairdresserId == hairdresser.HairdresserId).ToList();
+           
             hairdresser.Images = _db.HairdresserImage.Where((res) => res.Hairdresser.HairdresserId == hairdresser.HairdresserId).ToList();
+            
             hairdresser.SocialNetworks = _db.SocialHairdresser.Where((res) => res.Hairdresser.HairdresserId == hairdresser.HairdresserId).ToList();
+            
             return hairdresser;
         }
 
-        public Task<bool> Update(Hairdresser obj)
+        public async Task<bool> Update(Hairdresser obj)
         {
-            throw new NotImplementedException();
+            var oldObj = await _db.Hairdresser.SingleOrDefaultAsync((el) => el.HairdresserId == obj.HairdresserId);
+            if(oldObj is null)
+            {
+                return false;
+            }
+            var owner = await _db.User.SingleOrDefaultAsync((user) => user.UserId == obj.Owner.UserId);
+            if (owner is null)
+            {
+                return false;
+            }
+            var municipality = await _db.Municipality.SingleOrDefaultAsync((mun) => mun.MunicipalityId == obj.Municipality.MunicipalityId);
+            if (municipality is null)
+            {
+                return false;
+            }
+            obj.Owner = owner;
+            obj.Municipality = municipality;
+
+            _db.Entry(oldObj).State = EntityState.Detached;
+            _db.Update(obj);
+            await _db.SaveChangesAsync();
+            return true;
         }
     }
 }

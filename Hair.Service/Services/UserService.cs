@@ -24,9 +24,22 @@ namespace Hair.Service.Services
             return true;
         }
 
-        public Task<bool> Delete(int id)
+        public async Task<bool> Delete(int id)
         {
-            throw new NotImplementedException();
+            var user = await _db.User.SingleOrDefaultAsync((user) => user.UserId == id);
+            if (user is null)
+            {
+                return false;
+            }
+            _db.Reservation.Where((res) => res.User.UserId == user.UserId)
+                .ToList().ForEach((res) => _db.Entry(res).State = EntityState.Deleted);
+
+            _db.FavouriteHairdresser.Where((res) => res.User.UserId == user.UserId)
+                .ToList().ForEach((res) => _db.Entry(res).State = EntityState.Deleted);
+
+            _db.Entry(user).State = EntityState.Deleted;
+            await _db.SaveChangesAsync();
+            return true;
         }
 
         public async Task<IEnumerable<User>> GetAll()
@@ -53,7 +66,7 @@ namespace Hair.Service.Services
             var userOld = await _db.User.SingleOrDefaultAsync((u) => u.UserId == obj.UserId);
             if (userOld is null) return false;
 
-            _db.Entry(obj).State = EntityState.Detached;
+            _db.Entry(userOld).State = EntityState.Detached;
             _db.Update(obj);
             await _db.SaveChangesAsync();
             return true;

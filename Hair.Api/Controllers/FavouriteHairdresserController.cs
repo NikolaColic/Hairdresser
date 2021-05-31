@@ -73,7 +73,7 @@ namespace Hair.Api.Controllers
                 }
                 var response = await _generic.Delete(id);
                 if (!response) return NotFound();
-                return Ok();
+                return NoContent();
 
             }
             catch (Exception ex)

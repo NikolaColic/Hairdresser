@@ -10,9 +10,7 @@ namespace Hair.Data.Entities
     /// <summary>
     /// Class favourite hairdresser for user
     /// </summary>
-#pragma warning disable CS1591 // Missing XML comment for publicly visible type or member
     public class FavouriteHairdresser
-#pragma warning restore CS1591 // Missing XML comment for publicly visible type or member
     {
         /// <summary>
         /// Unique id

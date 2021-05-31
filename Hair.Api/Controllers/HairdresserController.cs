@@ -89,7 +89,7 @@ namespace Hair.Api.Controllers
                 }
                 var response = await _generic.Add(hairdresser);
                 if (!response) return NotFound();
-                return RedirectToRoute("GetAll");
+                return Ok();
 
             }
             catch (Exception ex)
@@ -114,7 +114,7 @@ namespace Hair.Api.Controllers
                 }
                 var response = await _generic.Update(hairdresser);
                 if (!response) return NotFound();
-                return RedirectToRoute("GetAll");
+                return Ok();
 
             }
             catch (Exception ex)
