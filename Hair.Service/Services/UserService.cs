@@ -10,7 +10,7 @@ using System.Threading.Tasks;
 
 namespace Hair.Service.Services
 {
-    public class UserService : IGeneric<User>
+    public class UserService : IUserService
     {
         private readonly HairdresserDbContext _db;
         public UserService(HairdresserDbContext db)
@@ -22,6 +22,20 @@ namespace Hair.Service.Services
             await _db.AddAsync(obj);
             await _db.SaveChangesAsync();
             return true;
+        }
+
+        public async Task<User> Authenticate(string username, string password)
+        {
+            var user = await _db.User.SingleOrDefaultAsync((u) => u.Username == username && u.Password == password);
+            if(user == null)
+            {
+                return null;
+            }
+            user.ReservationsHistory = await _db.Reservation.Where((res) => res.User.UserId == user.UserId).Include(el => el.Hairdresser).ToListAsync();
+            user.FavouritesHairdresser = await _db.FavouriteHairdresser.Where((res) => res.User.UserId == user.UserId).Include(el => el.Hairdresser).ToListAsync();
+            user.HairdressersOwner = _db.Hairdresser.Where((hairdresser) => hairdresser.Owner.UserId == user.UserId).ToList();
+
+            return user;
         }
 
         public async Task<bool> Delete(int id)
@@ -49,6 +63,7 @@ namespace Hair.Service.Services
             {
                  user.ReservationsHistory = _db.Reservation.Where((res) => res.User.UserId == user.UserId).ToList();
                  user.FavouritesHairdresser = _db.FavouriteHairdresser.Where((res) => res.User.UserId == user.UserId).ToList();
+                 user.HairdressersOwner = _db.Hairdresser.Where((hairdresser) => hairdresser.Owner.UserId == user.UserId).ToList();
             }
             return users;
         }
@@ -56,6 +71,10 @@ namespace Hair.Service.Services
         public async Task<User> GetById(int id)
         {
             var user = await _db.User.SingleOrDefaultAsync((u) => u.UserId == id);
+            if(user == null)
+            {
+                return user;
+            }
             user.ReservationsHistory = await _db.Reservation.Where((res) => res.User.UserId == id).ToListAsync();
             user.FavouritesHairdresser = await _db.FavouriteHairdresser.Where((res) => res.User.UserId == id).ToListAsync();
             return user;
@@ -65,9 +84,19 @@ namespace Hair.Service.Services
         {
             var userOld = await _db.User.SingleOrDefaultAsync((u) => u.UserId == obj.UserId);
             if (userOld is null) return false;
-
+            var userNew = new User()
+            {
+                Date = obj.Date,
+                Email = obj.Email,
+                ImageUrl = obj.ImageUrl,
+                Name = obj.Name,
+                UserId = obj.UserId,
+                Number = obj.Number,
+                Password = obj.Password,
+                Username = obj.Username
+            };
             _db.Entry(userOld).State = EntityState.Detached;
-            _db.Update(obj);
+            _db.Update(userNew);
             await _db.SaveChangesAsync();
             return true;
         }

@@ -5,6 +5,7 @@ using Microsoft.Extensions.Logging;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net;
 using System.Threading.Tasks;
 
 namespace Hair.Api
@@ -21,6 +22,10 @@ namespace Hair.Api
                 .ConfigureWebHostDefaults(webBuilder =>
                 {
                     webBuilder.UseStartup<Startup>();
+                    //webBuilder.UseKestrel(opt =>
+                    //{
+                    //    opt.Listen(IPAddress.Parse("192.168.0.15"), port: 44314);
+                    //});
                 });
     }
 }

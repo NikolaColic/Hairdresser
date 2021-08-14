@@ -32,24 +32,27 @@ namespace Hair.Service.Services
             obj.Owner = owner;
             obj.Municipality = municipality;
 
+            var socialNetworks = obj.SocialNetworks;
+            obj.SocialNetworks = new List<SocialHairdresser>();
             await _db.AddAsync(obj);
             await _db.SaveChangesAsync();
+            //Vratiti deo da se tek posle dodaje za socialnetwork
 
 
-            var addedObj = await _db.Hairdresser.SingleOrDefaultAsync((hair) => hair.TaxId == obj.TaxId);
-            if(addedObj is null)
-            {
-                return false; 
-            }
-            if(obj.Images != null && obj.Images.Any())
-            {
-                obj.Images.ToList().ForEach(async (image) =>
-                {
-                    image.Hairdresser = addedObj;
-                    await _db.AddAsync(image);
-                });
-            }
-            await _db.SaveChangesAsync();
+            //var addedObj = await _db.Hairdresser.SingleOrDefaultAsync((hair) => hair.TaxId == obj.TaxId);
+            //if (addedObj is null)
+            //{
+            //    return false;
+            //}
+
+            //socialNetworks.ToList().ForEach(async (social) =>
+            //{
+            //    social.Hairdresser = addedObj;
+            //    var socialNetwork = await _db.SocialNetwork.SingleOrDefaultAsync((el) => el.SocialNetworkId == social.SocialNetwork.SocialNetworkId);
+            //    social.SocialNetwork = socialNetwork;
+            //    await _db.AddAsync(social);
+            //});
+            //await _db.SaveChangesAsync();
             return true;
         }
 
@@ -86,9 +89,9 @@ namespace Hair.Service.Services
 
             foreach(var hairdresser in hairdressers)
             {
-                hairdresser.Reservations = _db.Reservation.Where((res) => res.Hairdresser.HairdresserId == hairdresser.HairdresserId).ToList() ;
+                hairdresser.Reservations = _db.Reservation.Where((res) => res.Hairdresser.HairdresserId == hairdresser.HairdresserId).Include((el)=> el.User).ToList() ;
                 hairdresser.Images =   _db.HairdresserImage.Where((res) => res.Hairdresser.HairdresserId == hairdresser.HairdresserId).ToList();
-                hairdresser.SocialNetworks =  _db.SocialHairdresser.Where((res) => res.Hairdresser.HairdresserId == hairdresser.HairdresserId).ToList();
+                hairdresser.SocialNetworks =  _db.SocialHairdresser.Where((res) => res.Hairdresser.HairdresserId == hairdresser.HairdresserId).Include((el)=> el.SocialNetwork).ToList();
             }
             return hairdressers;
 

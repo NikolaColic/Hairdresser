@@ -165,7 +165,7 @@
             WEB API Controller for user 
             </summary>
         </member>
-        <member name="M:Hair.Api.Controllers.UserController.#ctor(Hair.Service.Interface.IGeneric{Hair.Data.Entities.User})">
+        <member name="M:Hair.Api.Controllers.UserController.#ctor(Hair.Service.Interface.IUserService)">
             <summary>
             Constructor
             </summary>
@@ -183,6 +183,13 @@
             </summary>
             <param name="id"></param>
             <returns>Return user filter by id</returns>
+        </member>
+        <member name="M:Hair.Api.Controllers.UserController.Authentification(Hair.Data.Entities.User)">
+            <summary>
+            Add new user OAUTH
+            </summary>
+            <param name="user"></param>
+            <returns>Return a list of users</returns>
         </member>
         <member name="M:Hair.Api.Controllers.UserController.Add(Hair.Data.Entities.User)">
             <summary>

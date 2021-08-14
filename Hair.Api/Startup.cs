@@ -26,21 +26,33 @@ namespace Hair.Api
         {
             Configuration = configuration;
         }
+        readonly string Cors = "Policy";
 
         public IConfiguration Configuration { get; }
 
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            services.AddCors(options =>
+            {
+                options.AddPolicy(Cors,
+                builder =>
+                {
+                    builder.AllowAnyOrigin()
+                    .AllowAnyHeader()
+                    .AllowAnyMethod();
+                });
+            });
             services.AddControllers();
             services.AddDbContext<HairdresserDbContext>(options => options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
             services.AddScoped<IGeneric<FavouriteHairdresser>, FavouriteHairdresserService>();
             services.AddScoped<IGeneric<HairdresserImage>, HairdresserImageService>();
             services.AddScoped<IGeneric<Hairdresser>, HairdresserService>();
             services.AddScoped<IGeneric<Municipality>, MunicipalityService>();
+
             services.AddScoped<IGeneric<Reservation>, ReservationService>();
             services.AddScoped<IGeneric<SocialNetwork>, SocialNetworkService>();
-            services.AddScoped<IGeneric<User>, UserService>();
+            services.AddScoped<IUserService, UserService>();
             services.AddControllers().AddNewtonsoftJson(options =>
                     options.SerializerSettings.ReferenceLoopHandling = Newtonsoft.Json.ReferenceLoopHandling.Ignore);
                 
@@ -86,6 +98,7 @@ namespace Hair.Api
 
             app.UseHttpsRedirection();
             app.UseSwagger();
+            app.UseCors(Cors);
 
             app.UseSwaggerUI(setupAction =>
             {

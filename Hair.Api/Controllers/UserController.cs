@@ -23,12 +23,12 @@ namespace Hair.Api.Controllers
     [ApiController]
     public class UserController : ControllerBase
     {
-        private readonly IGeneric<User> _generic;
+        private readonly IUserService _generic;
         /// <summary>
         /// Constructor
         /// </summary>
         /// <param name="generic"></param>
-        public UserController(IGeneric<User> generic)
+        public UserController(IUserService generic)
         {
             this._generic = generic;
         }
@@ -36,6 +36,7 @@ namespace Hair.Api.Controllers
         /// Get all users
         /// </summary>
         /// <returns>Returns a list of users</returns>
+        
         [HttpGet("GetAll")]
         public async Task<ActionResult<IEnumerable<User>>> GetAll()
         {
@@ -78,12 +79,37 @@ namespace Hair.Api.Controllers
         /// </summary>
         /// <param name="user"></param>
         /// <returns>Return a list of users</returns>
+        [HttpPost("authentification")]
+        public async Task<ActionResult<IEnumerable<User>>> Authentification([FromBody] User user)
+        {
+            try
+            {
+                if (user is null || string.IsNullOrEmpty(user.Username) || string.IsNullOrEmpty(user.Password))
+                {
+                    return BadRequest();
+                }
+                var response = await _generic.Authenticate(user.Username, user.Password);
+                if (response == null) return NotFound("Greska");
+                return Ok(response);
+
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(StatusCodes.Status500InternalServerError);
+            }
+        }
+
+        /// <summary>
+        /// Add new user OAUTH
+        /// </summary>
+        /// <param name="user"></param>
+        /// <returns>Return a list of users</returns>
         [HttpPost]
         public async Task<ActionResult<IEnumerable<User>>> Add([FromBody] User user)
         {
             try
             {
-                if(user is null)
+                if (user is null)
                 {
                     return BadRequest();
                 }
